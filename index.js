@@ -17,16 +17,23 @@ $(document).ready(function() {
     }
     $("#movie-input-btn").click(function(e) {
         e.preventDefault();
-        renderMovies(movieData);
+        let searchString = $("#movie-input").val();
+        let urlEncodedSearchString = encodeURIComponent(searchString);
+        fetch("http://www.omdbapi.com/?apikey=8534d2a7&s=" + urlEncodedSearchString)
+            .then(response => response.json())
+            .then(response => {
+                searchResponse = response.Search;
+                renderMovies(response.Search);
+            });
     });
 });
 
 function saveToWatchlist(imdbID){
-    var movie = movieData.find((currentMovie) => {
+    let movie = searchResponse.find((currentMovie) => {
         return currentMovie.imdbID === imdbID;
     });
-    var watchlistJSON = localStorage.getItem('watchlist');
-    var watchlist = JSON.parse(watchlistJSON);
+    let watchlistJSON = localStorage.getItem('watchlist');
+    let watchlist = JSON.parse(watchlistJSON);
     if(watchlist === null){
         watchlist = [];
     }
