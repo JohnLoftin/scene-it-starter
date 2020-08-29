@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    var watchlistJSON = localStorage.getItem('watchlist');
-    var watchList = JSON.parse(watchlistJSON);
+    let watchlistJSON = localStorage.getItem('watchlist');
+    let watchList = JSON.parse(watchlistJSON);
     function renderWatchList(watchArray) {
         watchArray.map((watchlistItem) => {
             $(".movies-container").append(`
@@ -21,12 +21,14 @@ $(document).ready(function() {
 });
 
 function removeFromWatchlist(imdbID){
-    var movie = watchlistJSON.filter((currentMovie) => {
+    let watchlistJSON = localStorage.getItem('watchlist');
+    let watchlist = JSON.parse(watchlistJSON);
+    let movie = watchlist.find((currentMovie) => {
         return currentMovie.imdbID === imdbID;
     });
-    var watchlistJSON = localStorage.getItem('watchlist');
-    var watchlist = JSON.parse(watchlistJSON);
-    watchlist.filter(movie);
+    console.log(movie);
+    console.log(watchlist);
+    //watchlist.filter(movie);
     watchlistJSON = JSON.stringify(watchlist);
     localStorage.setItem('watchlist', watchlistJSON);
 }
