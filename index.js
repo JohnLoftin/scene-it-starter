@@ -19,7 +19,7 @@ $(document).ready(function() {
         e.preventDefault();
         let searchString = $("#movie-input").val();
         let urlEncodedSearchString = encodeURIComponent(searchString);
-        fetch("http://www.omdbapi.com/?apikey=8534d2a7&s=" + urlEncodedSearchString)
+        fetch("https://www.omdbapi.com/?apikey=8534d2a7&s=" + urlEncodedSearchString)
             .then(response => response.json())
             .then(response => {
                 searchResponse = response.Search;
